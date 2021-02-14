@@ -6,10 +6,11 @@
     state: present
   notify: restart mysql
 
-- name: Enable service
+- name: Enable and start service
   systemd:
     name: mysqld
     enabled: yes
+    state: started
 
 - name: Add Python MySQL support
   apt:
