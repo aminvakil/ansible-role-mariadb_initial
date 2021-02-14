@@ -23,6 +23,7 @@
     password: "{{ mysql_root_password }}"
     priv: "*.*:ALL,GRANT"
     host: "{{ item }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   loop:
     - "{{ ansible_hostname }}"
     - 127.0.0.1
