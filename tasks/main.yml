@@ -6,11 +6,17 @@
     state: present
   notify: restart mysql
 
-- name: Enable and start service
-  systemd:
-    name: mysqld
-    enabled: yes
-    state: started
+# - name: Enable and start service
+#   systemd:
+#     name: mysqld
+#     enabled: yes
+#     state: started
+
+- name: Enable and start service using command temporary
+  command: systemctl enable mysqld --now
+  changed_when: no
+  tags:
+    - skip_ansible_lint
 
 - name: Add Python MySQL support
   apt:
