@@ -40,3 +40,45 @@
     login_password: "{{ mysql_root_password }}"
     db: test
     state: absent
+
+- name: protect my.cnf
+  file:
+    path: /etc/mysql/my.cnf
+    mode: '0640'
+    owner: root
+    group: mysql
+    follow: true
+    state: file
+
+- name: ensure permissions on mysql-datadir are correct
+  file:
+    path: /var/lib/mysql
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: '0750'
+
+- name: ensure permissions on mysql-logfile are correct
+  file:
+    path: /var/log/mysql/error.log
+    state: file
+    owner: mysql
+    group: adm
+    mode: '0640'
+
+- name: check mysql configuration-directory exists and has right permissions
+  file:
+    path: /etc/mysql/conf.d
+    state: directory
+    owner: mysql
+    group: adm
+    mode: '0750'
+
+- name: apply hardening configuration
+  template:
+    src: 'hardening.cnf.j2'
+    dest: /etc/mysql/conf.d/hardening.cnf
+    owner: root
+    group: mysql
+    mode: '0640'
+  notify: restart mysql
