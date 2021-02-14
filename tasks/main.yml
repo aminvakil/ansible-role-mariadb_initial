@@ -20,7 +20,7 @@
 
 - name: Check if mysql has been configured or not
   stat:
-    path: /etc/mysql/conf.d/hardening.cf
+    path: /etc/mysql/conf.d/hardening.cnf
   register: mysql_configured
 
 - block:
