@@ -21,14 +21,8 @@
   mysql_user:
     name: root
     password: "{{ mysql_root_password }}"
-    priv: "*.*:ALL,GRANT"
-    host: "{{ item }}"
+    host_all: true
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  loop:
-    - "{{ ansible_hostname }}"
-    - 127.0.0.1
-    - ::1
-    - localhost
   no_log: true
 
 - name: delete anonymous MySQL server user for {{ ansible_hostname }}
@@ -36,11 +30,8 @@
     login_user: root
     login_password: "{{ mysql_root_password }}"
     user: ""
-    host: "{{ item }}"
     state: "absent"
-  loop:
-    - "{{ ansible_hostname }}"
-    - ""
+    host_all: true
   no_log: true
 
 - name: remove the MySQL test database
