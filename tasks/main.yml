@@ -11,6 +11,7 @@
   changed_when: no
   tags:
     - skip_ansible_lint
+  ignore_errors: true
 
 - name: log
   shell: "sleep 5 && journalctl -n 100 | cat"
