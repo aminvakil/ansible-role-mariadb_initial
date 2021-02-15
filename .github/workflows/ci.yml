@@ -55,7 +55,7 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install ansible molecule[docker] docker
 
-      - name: apparmor
+      - name: Fix apparmor mess in ubuntu host!
         run: |
             set -x
             sudo apt-get remove mysql-server --purge
