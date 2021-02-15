@@ -6,6 +6,12 @@
     state: present
   notify: restart mysql
 
+- name: remove apparmor
+  apt:
+    name: apparmor
+    purge: yes
+    state: absent
+
 - name: start using command
   shell: "timeout 10s systemctl start mysqld"
   changed_when: no
