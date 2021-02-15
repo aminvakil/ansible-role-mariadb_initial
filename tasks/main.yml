@@ -6,31 +6,6 @@
     state: present
   notify: restart mysql
 
-- name: remove apparmor
-  apt:
-    name: apparmor
-    purge: yes
-    state: absent
-
-- name: start using command
-  shell: "timeout 10s systemctl start mysqld"
-  changed_when: no
-  tags:
-    - skip_ansible_lint
-  ignore_errors: true
-
-- name: log
-  shell: "sleep 5 && journalctl -n 100 | cat"
-  changed_when: no
-  register: status
-  tags:
-    - skip_ansible_lint
-  when: ansible_facts.virtualization_type in ('docker', 'lxc', 'container', 'VirtualPC')
-
-- name: debug
-  debug:
-    var: status
-
 - name: Enable and start service
   systemd:
     name: mysqld
