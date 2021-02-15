@@ -55,6 +55,13 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install ansible molecule[docker] docker
 
+      - name: apparmor
+        run: |
+            set -x
+            apt-get remove mysql-server --purge
+            apt-get install apparmor-profiles
+            apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+
       - name: Run Molecule tests.
         run: molecule test
         env:
