@@ -1,7 +1,7 @@
 ---
 - name: Install MariaDB Server 10
   apt:
-    name: mariadb-server=1:10.3.25-0+deb10u1
+    name: mariadb-server
     install_recommends: no
     state: present
   notify: restart mysql
