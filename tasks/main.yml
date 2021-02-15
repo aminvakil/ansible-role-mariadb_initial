@@ -6,7 +6,13 @@
     state: present
   notify: restart mysql
 
-- name: Enable and start service using command temporary
+- name: start using command
+  shell: "timeout 10s systemctl start mysqld"
+  changed_when: no
+  tags:
+    - skip_ansible_lint
+
+- name: log
   shell: "sleep 5 && journalctl -n 100 | cat"
   changed_when: no
   register: status
