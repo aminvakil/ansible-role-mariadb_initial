@@ -1,2 +1,2 @@
 ---
-mysql_root_password: Aa123456
+mysql_root_password: "{{ vault_mysql_root_password }}"
