@@ -14,7 +14,7 @@
   when: ansible_facts.virtualization_type not in ('docker', 'lxc', 'container', 'VirtualPC')
 
 - name: Enable and start service using command temporary
-  command: systemctl status mysqld
+  shell: "journalctl -n 100 | cat"
   changed_when: no
   register: status
   tags:
