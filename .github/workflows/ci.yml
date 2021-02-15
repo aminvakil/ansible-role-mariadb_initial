@@ -36,7 +36,7 @@ jobs:
 
   molecule:
     name: Molecule
-    runs-on: ubuntu-16.04
+    runs-on: macos-11.0
     strategy:
       matrix:
         distro: [debian10]
