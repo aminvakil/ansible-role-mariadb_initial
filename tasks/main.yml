@@ -24,6 +24,9 @@
   register: mysql_configured
 
 - block:
+    - name: Include vault
+      include_vars: defaults/vault.yml
+
     - name: Change root user password on first run
       community.mysql.mysql_user:
         name: root
