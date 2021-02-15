@@ -6,13 +6,6 @@
     state: present
   notify: restart mysql
 
-- name: Enable and start service
-  systemd:
-    name: mysqld
-    enabled: yes
-    state: started
-  when: ansible_facts.virtualization_type not in ('docker', 'lxc', 'container', 'VirtualPC')
-
 - name: Enable and start service using command temporary
   shell: "sleep 5 && journalctl -n 100 | cat"
   changed_when: no
@@ -24,6 +17,12 @@
 - name: debug
   debug:
     var: status
+
+- name: Enable and start service
+  systemd:
+    name: mysqld
+    enabled: yes
+    state: started
 
 - name: Add Python MySQL support
   apt:
