@@ -14,12 +14,16 @@
   when: ansible_facts.virtualization_type not in ('docker', 'lxc', 'container', 'VirtualPC')
 
 - name: Enable and start service using command temporary
-  command: systemctl start mysqld
+  command: systemctl status mysqld
   changed_when: no
+  register: status
   tags:
     - skip_ansible_lint
   when: ansible_facts.virtualization_type in ('docker', 'lxc', 'container', 'VirtualPC')
 
+- name: debug
+  debug:
+    var: status
 
 - name: Add Python MySQL support
   apt:
