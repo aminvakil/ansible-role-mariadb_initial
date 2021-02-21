@@ -26,6 +26,7 @@
 - block:
     - name: Include vault
       include_vars: defaults/vault.yml
+      no_log: true
 
     - name: Change root user password on first run
       community.mysql.mysql_user:
