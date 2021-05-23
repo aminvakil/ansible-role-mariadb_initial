@@ -52,6 +52,7 @@
         login_password: "{{ mysql_root_password }}"
         db: test
         state: absent
+      no_log: true
 
     - name: protect my.cnf
       file:
